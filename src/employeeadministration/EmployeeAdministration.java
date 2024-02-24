@@ -30,8 +30,16 @@ public class EmployeeAdministration {
     }
 
     public static void main(String[] args) {
-        int m = 1;
-        EmployeeTest(m);
+        Employee perons1 = new Employee("Joe Bloggs", "jb@gmail.com");
+        Employee perons2 = new Employee("Ann Banana", "ab@gmail.com");
+        Employee perons3 = new Employee("Tom Thumb", "tt@gmail.com");
+        Company.addNewStaff(perons1);
+        Company.addNewStaff(perons2);
+        Company.addNewStaff(perons3);
+        String username = "Gnomeo";
+        String password = "smurf";
+        Company.getStaffNumber();
+        Company.listEmployee(0);
     }
 
 }

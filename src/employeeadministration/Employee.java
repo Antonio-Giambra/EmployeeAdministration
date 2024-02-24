@@ -6,6 +6,8 @@ public class Employee {
     private String email;
     private static int empNum = 1;
     private int nextEmpNum = empNum;
+    private String username;
+    private String password;
 
     public String getName() {
         return name;
