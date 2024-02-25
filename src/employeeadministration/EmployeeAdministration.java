@@ -9,7 +9,7 @@ public class EmployeeAdministration {
         Employee perons2 = new Employee("Ann Banana", "ab@gmail.com");
         Employee perons3 = new Employee("Tom Thumb", "tt@gmail.com");
 
-        ArrayList<Employee> projectGroup = new ArrayList<>();
+        ArrayList<Employee> projectGroup = new ArrayList();
         projectGroup.add(perons1);
         projectGroup.add(perons2);
         projectGroup.add(perons3);
@@ -30,16 +30,20 @@ public class EmployeeAdministration {
     }
 
     public static void main(String[] args) {
-        Employee perons1 = new Employee("Joe Bloggs", "jb@gmail.com");
-        Employee perons2 = new Employee("Ann Banana", "ab@gmail.com");
-        Employee perons3 = new Employee("Tom Thumb", "tt@gmail.com");
-        Company.addNewStaff(perons1);
-        Company.addNewStaff(perons2);
-        Company.addNewStaff(perons3);
-        String username = "Gnomeo";
-        String password = "smurf";
-        Company.getStaffNumber();
-        Company.listEmployee(0);
+        Company myCompany = new Company("Trump");
+        Employee person1 = new Employee("Joe Bloggs", "jb@gmail.com");
+        Employee person2 = new Employee("Ann Banana", "ab@gmail.com");
+        Employee person3 = new Employee("Tom Thumb", "tt@gmail.com");
+        Employee person4 = new Employee("Antonio Giambra", "antonio@gmail.com","Gnomeo","smurf");
+        
+        
+        myCompany.addNewStaff(person2);
+        myCompany.addNewStaff(person3);
+        myCompany.addNewStaff(person1);
+        myCompany.addNewStaff(person4);
+        myCompany.getListEmployee(5);
+        
+        
     }
 
 }

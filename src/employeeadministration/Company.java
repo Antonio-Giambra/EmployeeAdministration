@@ -1,19 +1,14 @@
-
 package employeeadministration;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Company {
-    static private String companyName;
-    static private Employee employee = new Employee();
-    static private ArrayList<Employee> staff = new ArrayList<>();
+public class Company extends Employee{
 
-    public Company() {
-        this.companyName = "Trump";
-    }
-    
-    public Company(String companyName){
+    private String companyName;
+    private ArrayList<Employee> staff = new ArrayList();
+
+    public Company(String companyName) {
         this.companyName = companyName;
     }
 
@@ -24,24 +19,25 @@ public class Company {
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
-    
-    public static void addNewStaff(Employee employee){
-        staff.add(employee);
+
+    public void addNewStaff(Employee hola) {
+        staff.add(hola);
     }
-    
-    public static void getStaffNumber(){
+
+    public void getStaffNumber() {
         for (int i = 0; i < staff.size(); i++) {
             System.out.println(staff.get(i).getNextEmpNum());
         }
     }
-    
-    public static void listEmployee(int num){
+
+    public void getListEmployee(int num) {
         Iterator<Employee> listEmp = staff.iterator();
-        while(listEmp.hasNext()) {
-            System.out.println(listEmp.next().getNextEmpNum());
-        }
-        if(listEmp.next().getNextEmpNum() == num){
-            System.out.println(listEmp.next().getName());
+        
+        while (listEmp.hasNext()) {
+            Employee employee = listEmp.next();
+            if (employee.getNextEmpNum() == num) {
+                System.out.println(employee.getName());
+            }
         }
     }
 }
