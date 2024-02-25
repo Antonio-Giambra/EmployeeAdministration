@@ -22,6 +22,7 @@ public class Company extends Employee{
 
     public void addNewStaff(Employee hola) {
         staff.add(hola);
+        System.out.println("Employee " + hola.getName() + " has been added to the list");
     }
 
     public void getStaffNumber() {
@@ -29,7 +30,15 @@ public class Company extends Employee{
             System.out.println(staff.get(i).getNextEmpNum());
         }
     }
-
+    
+    public void getListEmployee() {
+        Iterator<Employee> listEmp = staff.iterator();
+        
+        while (listEmp.hasNext()) {
+            Employee employee = listEmp.next();
+            System.out.println(employee.getNextEmpNum() + " " + employee.getName() + " " + employee.getEmail());
+        }
+    }
     public void getListEmployee(int num) {
         Iterator<Employee> listEmp = staff.iterator();
         
@@ -37,6 +46,18 @@ public class Company extends Employee{
             Employee employee = listEmp.next();
             if (employee.getNextEmpNum() == num) {
                 System.out.println(employee.getName());
+            }
+        }
+    }
+    
+    public void removeStaff(int empNum){
+        Iterator<Employee> listEmp = staff.iterator();
+        
+        while (listEmp.hasNext()) {
+            Employee employee = listEmp.next();
+            if (employee.getNextEmpNum() == empNum) {
+                System.out.println("Employee " + employee.getName() + " has been removed");
+                staff.remove(employee);
             }
         }
     }
