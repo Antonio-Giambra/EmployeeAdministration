@@ -4,28 +4,28 @@ public class Employee {
 
     private String name;
     private String email;
-    private static int empNum = 1;
-    private int nextEmpNum;
+    private int empNum;
+    private static int nextEmpNum = 1;
     private String username;
     private String password;
 
     public Employee() {
         this.name = "Antonio";
         this.email = "antonio@gmail.com";
-        this.nextEmpNum = empNum++;
+        this.empNum = setNextEmpNum(nextEmpNum++);
     }
 
     public Employee(String fullName, String email) {
         this.name = fullName;
         this.email = emailChecker(email);
-        this.nextEmpNum = setNextEmpNum(empNum++);
+        this.empNum = setNextEmpNum(nextEmpNum++);
     }
     public Employee(String fullName, String email, String username, String password) {
         this.name = fullName;
         this.email = emailChecker(email);
         this.username = setUsername(username);
-        this.password = password;
-        this.nextEmpNum = setNextEmpNum(empNum++);
+        this.password = setPassword(password);
+        this.empNum = setNextEmpNum(nextEmpNum++);
     }
     
     public String getName() {
@@ -70,7 +70,7 @@ public class Employee {
             this.email = emailChecker(email);
     }
     
-    public String emailChecker(String email){
+    public static String emailChecker(String email){
         String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" 
         + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
         
@@ -80,9 +80,9 @@ public class Employee {
         return null;
     }
     
-    public int setNextEmpNum(int empNum) {
-        this.nextEmpNum = empNum;
-        return nextEmpNum;
+    public int setNextEmpNum(int nextEmpNum) {
+        this.empNum = nextEmpNum;
+        return empNum;
         
     }
 }

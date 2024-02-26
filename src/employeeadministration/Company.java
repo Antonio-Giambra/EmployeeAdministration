@@ -1,12 +1,12 @@
 package employeeadministration;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 
-public class Company extends Employee{
+public class Company{
 
     private String companyName;
-    private ArrayList<Employee> staff = new ArrayList();
+    private HashSet<Employee> staff = new HashSet<Employee>();
 
     public Company(String companyName) {
         this.companyName = companyName;
@@ -23,11 +23,12 @@ public class Company extends Employee{
     public void addNewStaff(Employee hola) {
         staff.add(hola);
         System.out.println("Employee " + hola.getName() + " has been added to the list");
+        System.out.println();
     }
 
     public void getStaffNumber() {
-        for (int i = 0; i < staff.size(); i++) {
-            System.out.println(staff.get(i).getNextEmpNum());
+        for ( Employee employee : staff){
+            System.out.println(employee.getEmpNum());
         }
     }
     
@@ -36,7 +37,7 @@ public class Company extends Employee{
         
         while (listEmp.hasNext()) {
             Employee employee = listEmp.next();
-            System.out.println(employee.getNextEmpNum() + " " + employee.getName() + " " + employee.getEmail());
+            System.out.println(employee.getEmpNum() + " " + employee.getName() + " " + employee.getEmail());
         }
     }
     public void getListEmployee(int num) {
@@ -44,7 +45,7 @@ public class Company extends Employee{
         
         while (listEmp.hasNext()) {
             Employee employee = listEmp.next();
-            if (employee.getNextEmpNum() == num) {
+            if (employee.getEmpNum() == num) {
                 System.out.println(employee.getName());
             }
         }
@@ -55,9 +56,9 @@ public class Company extends Employee{
         
         while (listEmp.hasNext()) {
             Employee employee = listEmp.next();
-            if (employee.getNextEmpNum() == empNum) {
+            if (employee.getEmpNum() == empNum) {
                 System.out.println("Employee " + employee.getName() + " has been removed");
-                staff.remove(employee);
+                listEmp.remove();
             }
         }
     }
