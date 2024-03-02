@@ -1,65 +1,123 @@
 package employeeadministration;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
 public class Company{
-
+    //Setting constructors as private for security 
     private String companyName;
-    private HashSet<Employee> staff = new HashSet<Employee>();
-
+    //Creation of HashSet for bonus challenge
+    private HashSet<Employee> staffSet = new HashSet<Employee>();
+    //ArrayList implemented as it will be allocating every employee created
+    private ArrayList<Employee> staff = new ArrayList<Employee>();
+    
+    //Constructor for company name
     public Company(String companyName) {
-        this.companyName = companyName;
+        this.companyName = setCompanyName(companyName);
     }
-
+    
+    //Company name accesor
     public String getCompanyName() {
         return companyName;
     }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    
+    //setCompanyName setter for privacy and security
+    public String setCompanyName(String company) {
+        this.companyName = company;
+        return companyName;
     }
-
-    public void addNewStaff(Employee hola) {
-        staff.add(hola);
-        System.out.println("Employee " + hola.getName() + " has been added to the list");
-        System.out.println();
+    
+    //addNewStaff method implemented for adding new employee to arrayList by the Manager
+    public void addNewStaff(Employee person) {
+        try{
+            //For HashSet - Bonus Challenge, we have created a forEach loop in order to find if an new employee and old employee has the same EmpNum, if so, the old one will be removed and add the new one.
+            staffSet.add(person);
+            for(Employee employeeCheck : staffSet){
+                if(employeeCheck.getEmpNum() == person.getEmpNum()){
+                    staffSet.remove(employeeCheck);
+                }
+            }
+            //adding the employee to ArrayList and displaying employee information
+            staff.add(person);
+            System.out.println("Employee " + person.getName() + " has been added to the list");
+            System.out.println();
+        }catch (Exception e){
+            System.out.print(e);
+        }
     }
-
+    
+    //getStaff method implemented in order to get the size of the ArrayList
+    public int getStaff(){
+        return staff.size();
+    }
+    
+    //getStaffNumber method implemented in order to get the size of the ArrayList to display it on terminal
     public void getStaffNumber() {
-        for ( Employee employee : staff){
-            System.out.println(employee.getEmpNum());
+        try{
+            System.out.println("There are " + staff.size() + " Employees within the Array List");
+            System.out.println();
+        }catch (Exception e){
+            System.out.print(e);
         }
     }
     
-    public void getListEmployee() {
-        Iterator<Employee> listEmp = staff.iterator();
-        
-        while (listEmp.hasNext()) {
-            Employee employee = listEmp.next();
-            System.out.println(employee.getEmpNum() + " " + employee.getName() + " " + employee.getEmail());
+    //getCompleteList method added in order to get all information stored in ArrayList and also, it has been created for TESTING PURPOSES
+    public void getCompleteList() {
+        try{
+            //Iterating our ArrayList with Iterator object and displaying all information from ArrayList
+            Iterator<Employee> listEmp = staff.iterator();
+
+            while (listEmp.hasNext()) {
+                Employee employee = listEmp.next();
+                System.out.println(employee.getEmpNum() + " " + employee.getName() + " " + employee.getEmail());
+                System.out.println();
+            }
+        }catch (Exception e){
+            System.out.print(e);
         }
     }
+    //getCompleteList accesor method added in order to get employee names above than number provided
     public void getListEmployee(int num) {
-        Iterator<Employee> listEmp = staff.iterator();
-        
-        while (listEmp.hasNext()) {
-            Employee employee = listEmp.next();
-            if (employee.getEmpNum() == num) {
-                System.out.println(employee.getName());
+        try{
+            //Iterating our ArrayList with Iterator object and displaying all information from ArrayList
+            Iterator<Employee> listEmp = staff.iterator();
+            System.out.println("Employees with a higher number of employees than indicated are");
+            while (listEmp.hasNext()) {
+                Employee employee = listEmp.next();
+                //If EmpNum is greater than provided num, names will be displayed
+                if (employee.getEmpNum() > num) {
+                    System.out.println(employee.getName());
+                }
             }
+        }catch (Exception e){
+            System.out.print(e);
         }
     }
     
+    //removeStaff method implemented in order to remove a selected employee by its employee number
     public void removeStaff(int empNum){
-        Iterator<Employee> listEmp = staff.iterator();
-        
-        while (listEmp.hasNext()) {
-            Employee employee = listEmp.next();
-            if (employee.getEmpNum() == empNum) {
-                System.out.println("Employee " + employee.getName() + " has been removed");
-                listEmp.remove();
+        try{
+            //Iterating our ArrayList with Iterator object in order to find the employee selected for removing
+            Iterator<Employee> listEmp = staff.iterator();
+            //boolean finder used to show whether if employee exist or not.
+            boolean finder = false;
+            
+            while (listEmp.hasNext()) {
+                Employee employee = listEmp.next();
+                //if employee does exist, will be removed.
+                if (employee.getEmpNum() == empNum) {
+                    System.out.println("Employee " + employee.getName() + " has been removed");
+                    System.out.println();
+                    listEmp.remove();
+                    finder = true;
+                } 
+                
             }
+            //if does not exist a "employee not found" will be displayed.
+            if(finder == false)System.out.println("Sorry, employee not found");
+        }catch (Exception e){
+            System.out.print(e);
         }
     }
 }
