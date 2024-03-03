@@ -1,10 +1,9 @@
 package employeeadministration;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 //-----------------------------------GITHUB REPOSITORY---------------------------------------//
-//------------- https://github.com/Antonio-Giambra/EmployeeAdministration ---------------------//
+//------------- https://github.com/Antonio-Giambra/EmployeeAdministration -------------------//
 //-------------------------------------------------------------------------------------------//
 
 public class EmployeeAdministration {
@@ -20,18 +19,16 @@ public class EmployeeAdministration {
         projectGroup[0] = person1;
         projectGroup[1] = person2;
         projectGroup[2] = person3;
-        //Adding the above employee to our company for TESTING PURPOSES
         company.addNewStaff(person1);
         company.addNewStaff(person2);
         company.addNewStaff(person3);
         
-        //Printing out the value of variable EmpNum to the terminal window. 
+        //Printing out the value of variable nextEmpNum to the terminal window. 
         System.out.println("---------------------------------------------------------Printing out the value of variable nextEmpNum to the terminal window. --------------------------------------------------------------------------");
-        for (int i = 0; i < projectGroup.length; i++) {
-            //Looping each employee in order to get their EmpNum
-            System.out.println(projectGroup[i].getEmpNum());
+        
+        System.out.println(projectGroup[projectGroup.length -1].getNextEmpNum());
 
-        }
+        
         //Searching and displaying the name of each employee
         System.out.println("------------------Searching and displaying the name of each of the employees in the projectGroup array who have an employee number above the value stored in a variable called m.------------------------");
         //Searching and displaying the name of each of the employees in the projectGroup array who have an employee number above the value stored in a variable called m.
@@ -46,39 +43,40 @@ public class EmployeeAdministration {
     }
 
     public static void main(String[] args) {
-        
+        try{
         //Creating our company
-        Company myCompany = new Company("Trump");
+        Company myCompany = new Company("Activision");
         
         //Calling employeeTest method
         int m = 1;
         EmployeeTest(m, myCompany);
         
-        //Creation of 4 employee and adding them to company employee class, one of them should be the manager
+        //Creation of 4 employee and adding them to company employee class, one of them should be the manager. This has been created for TESTING PURPOSES
         Employee person4 = new Employee("Donal Trump", "donT@gmail.com");
         Employee person5 = new Employee("Cillian Murphy", "cmurphy@gmail.com");
         Employee person6 = new Employee("Toretto Sanchez", "Toretico@gmail.com");
-        Employee person7 = new Employee("Antonio Giambra", "antonio@gmail.com","Gnomeo","smurf");
+        Employee manager = new Employee("Antonio Giambra", "antonio@gmail.com","Gnomeo","smurf");
         myCompany.addNewStaff(person4);
         myCompany.addNewStaff(person5);
         myCompany.addNewStaff(person6);
-        myCompany.addNewStaff(person7);
+        myCompany.addNewStaff(manager);
         
         //Implementing a menu for the operator (Manager)
         Scanner sc = new Scanner(System.in);
+        System.out.println();
         System.out.println("Welcome to Employee Administration System \n\nPlease introduce your username with capital letter if needed:");
         String username = sc.nextLine();
         System.out.println();
         System.out.println("Please introduce your password with capital letter if needed:");
         String password = sc.nextLine();
         //Once username and password is received they should match with employee 7 who is the manager. For this a simple if has been implemented
-        if(username.equals(person7.getUsername()) && password.equals(person7.getPassword())){
+        if(username.equals(manager.getUsername()) && password.equals(manager.getPassword())){
             //trigger for while loop
             boolean trigger = false;
      
             while(trigger == false){
                 System.out.println();
-                System.out.println("Welcome " + person7.getName() + "\n Press 1 - to check the complete staff list \n Press 2 - to add a new staff \n Press 3 - to check the number of employees currently in the list \n Press 4 - to view employees with employee number above the provided number \n Press 5 - to remove a staff member \n Press 6 - to exit the system");
+                System.out.println("Welcome " + manager.getName() + "\n Press 1 - to check the complete staff list \n Press 2 - to add a new staff \n Press 3 - to check the number of employees currently in the list \n Press 4 - to view employees with employee number above the provided number \n Press 5 - to remove a staff member \n Press 6 - to exit the system");
                 //Getting selected option and storing in option integer
                 int option = sc.nextInt();
                 //Menu option managed by a switch cases
@@ -133,17 +131,17 @@ public class EmployeeAdministration {
                    //-----------DISPLAYING EMPLOYEES WITH EMPLOYEE NUMBER ABOVE OF THE PROVIDED NUMBER -------------//
                     case 4:
                         try{
-                            System.out.println("Please a enter number less than " + myCompany.getStaff() + " and greater than 0");
+                            System.out.println("Please a enter number equal or greater than 0");
                             //Since Scanner.nextInt() does not read the newline character in the input, Scanner.nextLine() called to returns after reading that newline.
                             sc.nextLine();
                             //Storing provided number in variable number
                             int number = Integer.parseInt(sc.nextLine());
                             //if number is less than ArrayList size and greater than 0, it is possible to call getListEmployee accessor
-                            if(number < myCompany.getStaff() && number > 0){
+                            if(number >= 0){
                                 myCompany.getListEmployee(number);
                                 break;
                             }else{
-                                System.out.println("Sorry, your number must be greater than 0 and less than " + myCompany.getStaff());
+                                System.out.println("Sorry, your number must be greater than 0");
                                 break;
                             }
                         }catch (Exception e){
@@ -155,9 +153,9 @@ public class EmployeeAdministration {
                             System.out.println();
                             System.out.println("Please enter the employee number which will be removed");
                             //Storing provided number in variable number
-                            int number = Integer.parseInt(sc.nextLine());
+                            //int numberTest = Integer.parseInt(sc.nextLine());
                             //Calling removeStaff method at Company class in order to remove the employee with employee number equals to number
-                            myCompany.removeStaff(number);
+                            myCompany.removeStaff(sc.nextInt());
                             break;
                         }catch(Exception e){
                             System.out.println(e);
@@ -184,6 +182,9 @@ public class EmployeeAdministration {
         }
        //closing the scanner
        sc.close();
+       }catch(Exception e){
+           System.out.println(e);
+       }
     }
 
 }

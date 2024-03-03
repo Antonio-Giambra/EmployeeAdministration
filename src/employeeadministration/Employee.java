@@ -1,7 +1,29 @@
 package employeeadministration;
 
 public class Employee {
-    
+    //----------HASHSET BONUS CHALLENGE------------------------//
+    //----------------With this override we can make our hashset inside our Company class not to add the same employee having the same empNum.---------------------//
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Employee other = (Employee) obj;
+        return this.empNum == other.empNum;
+    }
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------//
     //Setting variables as private for security 
     private String name;
     private String email;
@@ -75,7 +97,9 @@ public class Employee {
     }
     //setEmail setter for privacy and security
     public void setEmail(String email) {
-            this.email = emailChecker(email);
+        //email should be longer than 3 characteres
+        if(email.length() > 3) this.email = emailChecker(email);
+        else System.out.println("Sorry email address must have at least 4 characters");
     }
     //setNextEmpNum setter for privacy and security
     public int setNextEmpNum(int nextEmpNum) {
@@ -89,7 +113,7 @@ public class Employee {
         //uppercase and lowercase letters from a to z are allowed
         //underscore and hyphen and dot
         //consecutive dots are not allowed
-        //64 characteres are allowed
+        //64 characteres are allowed in the local part
         String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" 
         + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
         

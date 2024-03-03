@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class Company{
+
     //Setting constructors as private for security 
     private String companyName;
     //Creation of HashSet for bonus challenge
@@ -12,7 +13,10 @@ public class Company{
     //ArrayList implemented as it will be allocating every employee created
     private ArrayList<Employee> staff = new ArrayList<Employee>();
     
-    //Constructor for company name
+    public Company() {
+        this.companyName = "Epic Games";
+    }
+    //Constructor for company name with a parameter
     public Company(String companyName) {
         this.companyName = setCompanyName(companyName);
     }
@@ -28,28 +32,24 @@ public class Company{
         return companyName;
     }
     
+    
     //addNewStaff method implemented for adding new employee to arrayList by the Manager
     public void addNewStaff(Employee person) {
+        
         try{
-            //For HashSet - Bonus Challenge, we have created a forEach loop in order to find if an new employee and old employee has the same EmpNum, if so, the old one will be removed and add the new one.
-            staffSet.add(person);
-            for(Employee employeeCheck : staffSet){
-                if(employeeCheck.getEmpNum() == person.getEmpNum()){
-                    staffSet.remove(employeeCheck);
-                }
+            //adding new staff method will work if the employee has a valid email address. For security this condition has been implemented
+            if(person.getEmail() != null){
+                
+                //For HashSet - Bonus Challenge
+                staffSet.add(person);
+                
+                //adding the employee to ArrayList and displaying employee information
+                staff.add(person);
+                System.out.println("Employee " + person.getName() + " has been added to the list");
             }
-            //adding the employee to ArrayList and displaying employee information
-            staff.add(person);
-            System.out.println("Employee " + person.getName() + " has been added to the list");
-            System.out.println();
         }catch (Exception e){
             System.out.print(e);
         }
-    }
-    
-    //getStaff method implemented in order to get the size of the ArrayList
-    public int getStaff(){
-        return staff.size();
     }
     
     //getStaffNumber method implemented in order to get the size of the ArrayList to display it on terminal
@@ -65,14 +65,16 @@ public class Company{
     //getCompleteList method added in order to get all information stored in ArrayList and also, it has been created for TESTING PURPOSES
     public void getCompleteList() {
         try{
+            System.out.println();
+            System.out.println(companyName + " Company has the following employees:");
             //Iterating our ArrayList with Iterator object and displaying all information from ArrayList
             Iterator<Employee> listEmp = staff.iterator();
 
             while (listEmp.hasNext()) {
                 Employee employee = listEmp.next();
                 System.out.println(employee.getEmpNum() + " " + employee.getName() + " " + employee.getEmail());
-                System.out.println();
             }
+            System.out.println();
         }catch (Exception e){
             System.out.print(e);
         }
@@ -82,7 +84,7 @@ public class Company{
         try{
             //Iterating our ArrayList with Iterator object and displaying all information from ArrayList
             Iterator<Employee> listEmp = staff.iterator();
-            System.out.println("Employees with a higher number of employees than indicated are");
+            System.out.println("Employees with a higher employee number than " + num + " are:");
             while (listEmp.hasNext()) {
                 Employee employee = listEmp.next();
                 //If EmpNum is greater than provided num, names will be displayed
@@ -100,7 +102,7 @@ public class Company{
         try{
             //Iterating our ArrayList with Iterator object in order to find the employee selected for removing
             Iterator<Employee> listEmp = staff.iterator();
-            //boolean finder used to show whether if employee exist or not.
+            //boolean finder used to show whether employee exists or not.
             boolean finder = false;
             
             while (listEmp.hasNext()) {
